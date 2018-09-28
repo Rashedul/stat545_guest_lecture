@@ -1,0 +1,163 @@
+---
+title: 'STAT 545 Class Meeting 10: Join two data.frames/tables together using `dplyr`'
+output:
+  html_document:
+    keep_md: yes
+    toc: yes
+  html_notebook:
+    number_sections: yes
+    theme: cerulean
+    toc: yes
+---
+
+```{r, echo=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+#suppressPackageStartupMessages(library(gapminder))
+knitr::opts_chunk$set(echo=FALSE, fig.width=5, fig.height=3, fig.align='center')
+```
+
+## Today's Lessons
+
+Today's lessons are:
+
+- Two-table verbs
+- Combine data sets
+
+## Resources
+
+Concepts from today's class are closely mirrored by the following resources, which introduce `dplyr` functions for joining two data.frames or tables.
+
+The following are good walk-throughs:
+
+- [r4ds: Relational data](http://r4ds.had.co.nz/relational-data.html) chapter.
+    - Contains examples  with visualization
+- The [intro to two-table vignette](https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html) is also a great resource.
+
+Here are some other resources you might find useful:
+
+- [Jenny's tidying data tutorial](https://github.com/jennybc/lotr-tidy).
+    - Has a lot of examples, but less dialogue.
+- [`Data Wrangling` cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+    - Has simple examples with visualization.
+    
+## Participation
+
+To get participation points for today, we'll be filling out the [cm010-exercise.Rmd](https://github.com/STAT545-UBC/Classroom/blob/master/notes/cm010-exercise.Rmd) file, and adding it to your participation repo. 
+
+Let's get set up:
+
+1. To download the file the easy way, just click the upper-right drop-down menu [of the html version](http://stat545.com/Classroom/notes/cm010-exercise.nb.html) of the file.
+2. Download the `.Rmd` version to your local participation repo.
+3. Open the `.Rmd` file, and change the output type to `html_document`, keeping the `.md` file, too.
+4. _Optional, but recommended_: Stage and commit the Rmd file (you can do this through RStudio).
+    - You can still get participation marks by uploading the final files to GitHub.
+
+# Two-table verbs
+
+## Learning Objectives
+
+By the end of this lesson, students are expected to be able to:
+
+- Know the verbs that work with pairs of data.frames/tables.
+- Learn about differnt families of verbs
+
+## Discussion
+
+There are several families of verbs that include
+
+- Mutating joins
+- Filtering joins
+- Set operations
+- Binding
+
+Why `dplyr` for data.frames/table joining?
+
+- Structured Query Language (SQL) is used to access and manipulate  relational data
+- In `dplyr` concepts are simiar to SQL, although their expression in `dplyr` is a little different
+- `dplyr` is specialised to do data analysis but SQL is not
+
+# Combine data sets 
+
+## Learning Objectives
+
+By the end of this lesson, students are expected to be able to:
+
+- Have a sense of join types and the arguments required in join functions
+- Have a sense of four types of mutating joins and two types of filtering joins
+- Have a sense of `set` operations for data.frames/tables
+- Have a sense of binding two data.frames/tables by rows or columns
+- Have a sense of what arguments can be passed to join data.frames/tables
+
+## Discussion
+
+Mutating joins combine variables from the two data.frames/tables. `dplyr` supports four types of mutating joins
+
+- `inner_join()`
+- `left_join()`
+- `right_join()`
+- `full_join()`
+
+Filtering joins keep cases from the left-hand data.frame/table
+
+- `semi_join()`
+- `anti_join()`
+
+There are three set operations for two data.frames/tables
+
+- `intersect(y, z)`
+- `union(y, z)`
+- `setdiff(y, z)`
+
+Binding rows or columns from the two data.frames/tables. `dplyr` supports tow types of binding
+
+- `bind_rows()`
+- `bind_cols()`
+
+There are several arguments 
+
+- __two tables__
+- __by which column__
+- Copy
+- Suffix
+- etc.
+
+Example pseudocode: `joinFunction(df1, df2, by = "which column")`
+
+__Other implementations of join functions:__ base::merge() can perform all four types of mutating joins.
+
+
+| dplyr   |      merge      |  
+|----------|:-------------:|
+| `inner_join(x, y)` |  `merge(x, y)` | 
+| `left_join(x, y)` |    `merge(x, y, all.x = TRUE)`   | 
+| `right_join(x, y)` | `merge(x, y, all.y = TRUE)` |
+| `full_join(x, y)` | `merge(x, y, all.x = TRUE, all.y = TRUE)` |
+| | |
+
+Advantages of using `dplyr` for joining
+
+- `dplyr` verbs clearly conveys the intent of the code
+- `dplyr`’s joins are considerably faster
+
+# Joining data.frames/tables `df1` and `df2` by specific rows/columns
+
+## Learning Objectives
+
+This live-coding-based lesson focusses on: 
+
+- using the join functions for data.frames/tables `df1` and `df2`, while
+- using conditions for joining, filtering, set operations and binding.
+
+By the end of this lesson, students are expected to be able to:
+
+- Join, split or combine variables from data.frames/tables under the following situations:
+    - matching by columns
+    - matching by rows
+
+## Demonstration
+
+Note: We will use the join, set and binding functions with simple examples as well as do some in class practices with `flights2` and `nycflights13` datasets.
+
+Follow along with the [`cm010-exercise.Rmd`](https://github.com/STAT545-UBC/Classroom/blob/master/notes/cm006-exercise.Rmd) file we downloaded earlier.
+
+
