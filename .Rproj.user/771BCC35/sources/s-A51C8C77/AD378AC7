@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538118664397.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "422351833",
+    "id" : "AD378AC7",
+    "lastKnownWriteTime" : 1538118677,
+    "last_content_update" : 1538118677819,
+    "path" : "~/GoogleDrive/TA/stat545/stat545_guest_lecture/cm010.rmd",
+    "project_path" : "cm010.rmd",
+    "properties" : {
+        "cursorPosition" : "158,117",
+        "scrollLine" : "155"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
