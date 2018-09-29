@@ -82,27 +82,26 @@ Why `dplyr` for data.frames/table joining?
 
 By the end of this lesson, students are expected to be able to:
 
-- Have a sense of join types and the arguments required in join functions
+- Have a sense of different types of joining  data.frames and the arguments required in `dplyr`'s join functions
 - Have a sense of four types of mutating joins and two types of filtering joins
 - Have a sense of `set` operations for data.frames/tables
 - Have a sense of binding two data.frames/tables by rows or columns
-- Have a sense of what arguments can be passed to join data.frames/tables
 
 ## Discussion
 
-Mutating joins combine variables from the two data.frames/tables. `dplyr` supports four types of mutating joins
+Mutating joins combine variables from the two data.frames/tables e.g., `a` and `b`. `dplyr` supports four types of mutating joins
 
-- `inner_join()`
-- `left_join()`
-- `right_join()`
-- `full_join()`
+- `left_join(a,b)`
+- `right_join(a,b)`
+- `inner_join(a,b)`
+- `full_join(a,b)`
 
-Filtering joins keep cases from the left-hand data.frame/table
+Filtering joins keep cases from the left-hand data.frame/table. 
 
-- `semi_join()`
-- `anti_join()`
+- `semi_join(a,b)`
+- `anti_join(a,b)`
 
-There are three set operations for two data.frames/tables
+There are three set operations for two data.frames/tables e.g., `y` and `z`.
 
 - `intersect(y, z)`
 - `union(y, z)`
@@ -110,8 +109,8 @@ There are three set operations for two data.frames/tables
 
 Binding rows or columns from the two data.frames/tables. `dplyr` supports tow types of binding
 
-- `bind_rows()`
-- `bind_cols()`
+- `bind_rows(y, z)`
+- `bind_cols(y, z)`
 
 There are several arguments 
 
@@ -139,14 +138,14 @@ Advantages of using `dplyr` for joining
 - `dplyr` verbs clearly conveys the intent of the code
 - `dplyr`’s joins are considerably faster
 
-# Joining data.frames/tables `df1` and `df2` by specific rows/columns
+# Live coding and demonstration of combining data sets
 
 ## Learning Objectives
 
 This live-coding-based lesson focusses on: 
 
-- using the join functions for data.frames/tables `df1` and `df2`, while
-- using conditions for joining, filtering, set operations and binding.
+- using the join functions for data.frames/tables, while
+- using conditions for joining, filtering, set operations and binding
 
 By the end of this lesson, students are expected to be able to:
 

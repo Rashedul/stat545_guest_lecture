@@ -137,7 +137,7 @@ $(document).ready(function () {
 <li><a href="#learning-objectives-1">Learning Objectives</a></li>
 <li><a href="#discussion-1">Discussion</a></li>
 </ul></li>
-<li><a href="#joining-data.framestables-df1-and-df2-by-specific-rowscolumns">Joining data.frames/tables <code>df1</code> and <code>df2</code> by specific rows/columns</a><ul>
+<li><a href="#live-coding-and-demonstration-of-combining-data-sets">Live coding and demonstration of combining data sets</a><ul>
 <li><a href="#learning-objectives-2">Learning Objectives</a></li>
 <li><a href="#demonstration">Demonstration</a></li>
 </ul></li>
@@ -222,28 +222,27 @@ $(document).ready(function () {
 <h2>Learning Objectives</h2>
 <p>By the end of this lesson, students are expected to be able to:</p>
 <ul>
-<li>Have a sense of join types and the arguments required in join functions</li>
+<li>Have a sense of different types of joining data.frames and the arguments required in <code>dplyr</code>’s join functions</li>
 <li>Have a sense of four types of mutating joins and two types of filtering joins</li>
 <li>Have a sense of <code>set</code> operations for data.frames/tables</li>
 <li>Have a sense of binding two data.frames/tables by rows or columns</li>
-<li>Have a sense of what arguments can be passed to join data.frames/tables</li>
 </ul>
 </div>
 <div id="discussion-1" class="section level2">
 <h2>Discussion</h2>
-<p>Mutating joins combine variables from the two data.frames/tables. <code>dplyr</code> supports four types of mutating joins</p>
+<p>Mutating joins combine variables from the two data.frames/tables e.g., <code>a</code> and <code>b</code>. <code>dplyr</code> supports four types of mutating joins</p>
 <ul>
-<li><code>inner_join()</code></li>
-<li><code>left_join()</code></li>
-<li><code>right_join()</code></li>
-<li><code>full_join()</code></li>
+<li><code>left_join(a,b)</code></li>
+<li><code>right_join(a,b)</code></li>
+<li><code>inner_join(a,b)</code></li>
+<li><code>full_join(a,b)</code></li>
 </ul>
-<p>Filtering joins keep cases from the left-hand data.frame/table</p>
+<p>Filtering joins keep cases from the left-hand data.frame/table.</p>
 <ul>
-<li><code>semi_join()</code></li>
-<li><code>anti_join()</code></li>
+<li><code>semi_join(a,b)</code></li>
+<li><code>anti_join(a,b)</code></li>
 </ul>
-<p>There are three set operations for two data.frames/tables</p>
+<p>There are three set operations for two data.frames/tables e.g., <code>y</code> and <code>z</code>.</p>
 <ul>
 <li><code>intersect(y, z)</code></li>
 <li><code>union(y, z)</code></li>
@@ -251,8 +250,8 @@ $(document).ready(function () {
 </ul>
 <p>Binding rows or columns from the two data.frames/tables. <code>dplyr</code> supports tow types of binding</p>
 <ul>
-<li><code>bind_rows()</code></li>
-<li><code>bind_cols()</code></li>
+<li><code>bind_rows(y, z)</code></li>
+<li><code>bind_cols(y, z)</code></li>
 </ul>
 <p>There are several arguments</p>
 <ul>
@@ -301,14 +300,14 @@ $(document).ready(function () {
 </ul>
 </div>
 </div>
-<div id="joining-data.framestables-df1-and-df2-by-specific-rowscolumns" class="section level1">
-<h1>Joining data.frames/tables <code>df1</code> and <code>df2</code> by specific rows/columns</h1>
+<div id="live-coding-and-demonstration-of-combining-data-sets" class="section level1">
+<h1>Live coding and demonstration of combining data sets</h1>
 <div id="learning-objectives-2" class="section level2">
 <h2>Learning Objectives</h2>
 <p>This live-coding-based lesson focusses on:</p>
 <ul>
-<li>using the join functions for data.frames/tables <code>df1</code> and <code>df2</code>, while</li>
-<li>using conditions for joining, filtering, set operations and binding.</li>
+<li>using the join functions for data.frames/tables, while</li>
+<li>using conditions for joining, filtering, set operations and binding</li>
 </ul>
 <p>By the end of this lesson, students are expected to be able to:</p>
 <ul>
