@@ -1,9 +1,14 @@
 cm008 Exercises
 ================
 
+Install `nycflights13` package
+
+``` r
+install.packages("nycflights13")
+```
+
 ``` r
 suppressPackageStartupMessages(library(tidyverse))
-#install.packages("nycflights13")
 suppressPackageStartupMessages(library(nycflights13))
 ```
 
@@ -111,20 +116,28 @@ left_join(a, b, by = c("x1" = "x3"))
 
 ``` r
 #what happen if two columns have the identical names
-(c <- data.frame(x1 = c(LETTERS[1:2],"x"), x2 = letters[1:3]))
+(c <- data.frame(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
 ```
 
     ##   x1 x2
-    ## 1  A  a
-    ## 2  B  b
-    ## 3  x  c
+    ## 1  A  1
+    ## 2  B  4
+    ## 3  x  5
 
 ``` r
-#inner_join(a, c)
+inner_join(a, c)
 ```
 
-`nycflights13` dataset has four tibbles e.g., `flights`, `airports`, `planes`
------------------------------------------------------------------------------
+    ## Joining, by = c("x1", "x2")
+
+    ## Warning: Column `x1` joining factors with different levels, coercing to
+    ## character vector
+
+    ##   x1 x2
+    ## 1  A  1
+
+`nycflights13` dataset has four tibbles e.g., `flights`, `airports`, `planes`.
+------------------------------------------------------------------------------
 
 ``` r
 #check the tibbles included in `nycflights13` package
