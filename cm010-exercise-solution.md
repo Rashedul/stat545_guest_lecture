@@ -389,6 +389,88 @@ Types of Set Operations for two datasets
 -   example for `intersect`: Rows that appear in both `y` and `z`
 -   example for `union`: Rows that appear in either or both `y` and `z`
 -   example for `setdiff`: Rows that appear in `y` but not `z`. **Caution:** `setdiff` for `y` to `z` and `z` to `y` are different.
+-   what happen if colnames are different?
+
+``` r
+# create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
+(y = data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+```
+
+    ##   x1 x2
+    ## 1  A  1
+    ## 2  B  2
+    ## 3  C  3
+
+``` r
+(z = data.frame(x1 = c("B", "C", "D"), x2 = 2:4))
+```
+
+    ##   x1 x2
+    ## 1  B  2
+    ## 2  C  3
+    ## 3  D  4
+
+``` r
+# example for `intersect`: Rows that appear in both `y` and `z`
+intersect(y,z)
+```
+
+    ## Warning: Column `x1` joining factors with different levels, coercing to
+    ## character vector
+
+    ##   x1 x2
+    ## 1  B  2
+    ## 2  C  3
+
+``` r
+# example for `union`: Rows that appear in either or both `y` and `z`
+union(y,z)
+```
+
+    ## Warning: Column `x1` joining factors with different levels, coercing to
+    ## character vector
+
+    ##   x1 x2
+    ## 1  D  4
+    ## 2  C  3
+    ## 3  B  2
+    ## 4  A  1
+
+``` r
+# example for `setdiff`: Rows that appear in `y` but not `z`. __Caution:__ `setdiff` for `y` to `z` and `z` to `y` are different.
+setdiff(y,z)
+```
+
+    ## Warning: Column `x1` joining factors with different levels, coercing to
+    ## character vector
+
+    ##   x1 x2
+    ## 1  A  1
+
+``` r
+setdiff(z,y)
+```
+
+    ## Warning: Column `x1` joining factors with different levels, coercing to
+    ## character vector
+
+    ##   x1 x2
+    ## 1  D  4
+
+``` r
+# what happen if colnames are different? 
+(x = data.frame(x1 = c("B", "C", "D"), x3 = 2:4))
+```
+
+    ##   x1 x3
+    ## 1  B  2
+    ## 2  C  3
+    ## 3  D  4
+
+``` r
+#intersect(y,x)
+#intersect(y,x)
+```
 
 Types of binding datasets
 -------------------------
@@ -399,10 +481,100 @@ Types of binding datasets
 -   use `bind_rows`, `bind_cols` functions
 -   example for `bind_rows`: Append z to y as new rows
 -   example for `bind_cols`: Append z to y as new columns. **Caution**: matches rows by position
+-   what happen if colnames are different?
+
+``` r
+# create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
+(y = data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+```
+
+    ##   x1 x2
+    ## 1  A  1
+    ## 2  B  2
+    ## 3  C  3
+
+``` r
+(z = data.frame(x1 = c("B", "C", "D"), x2 = 2:4))
+```
+
+    ##   x1 x2
+    ## 1  B  2
+    ## 2  C  3
+    ## 3  D  4
+
+``` r
+# example for `bind_rows`: Append z to y as new rows
+bind_rows(y,z)
+```
+
+    ## Warning in bind_rows_(x, .id): Unequal factor levels: coercing to character
+
+    ## Warning in bind_rows_(x, .id): binding character and factor vector,
+    ## coercing into character vector
+
+    ## Warning in bind_rows_(x, .id): binding character and factor vector,
+    ## coercing into character vector
+
+    ##   x1 x2
+    ## 1  A  1
+    ## 2  B  2
+    ## 3  C  3
+    ## 4  B  2
+    ## 5  C  3
+    ## 6  D  4
+
+``` r
+# example for `bind_cols`: Append z to y as new columns. __Caution__: matches rows by position
+bind_cols(y,z) #check colnames
+```
+
+    ##   x1 x2 x11 x21
+    ## 1  A  1   B   2
+    ## 2  B  2   C   3
+    ## 3  C  3   D   4
+
+``` r
+# what happen if colnames are different? 
+(x = data.frame(x1 = c("B", "C", "D"), x3 = 2:4))
+```
+
+    ##   x1 x3
+    ## 1  B  2
+    ## 2  C  3
+    ## 3  D  4
+
+``` r
+bind_rows(y,x)
+```
+
+    ## Warning in bind_rows_(x, .id): Unequal factor levels: coercing to character
+
+    ## Warning in bind_rows_(x, .id): binding character and factor vector,
+    ## coercing into character vector
+
+    ## Warning in bind_rows_(x, .id): binding character and factor vector,
+    ## coercing into character vector
+
+    ##   x1 x2 x3
+    ## 1  A  1 NA
+    ## 2  B  2 NA
+    ## 3  C  3 NA
+    ## 4  B NA  2
+    ## 5  C NA  3
+    ## 6  D NA  4
+
+``` r
+bind_cols(y,x)
+```
+
+    ##   x1 x2 x11 x3
+    ## 1  A  1   B  2
+    ## 2  B  2   C  3
+    ## 3  C  3   D  4
 
 Practice Exercises
 ------------------
 
 Practice these concepts in the following exercises. It might help you to first identify the type of function you are applying.
 
-### Let's create a data.frame `a` with x1 and x2 coulmns and have duplicated element in x1 column. Create another data.frame `b` with x1 and x3 columns. Then apply `left_join` function a to b and b to a.
+#### Let's create a data.frame `a` with x1 and x2 coulmns and have duplicated element in x1 column. Create another data.frame `b` with x1 and x3 columns. Then apply `left_join` function `a` to `b` and `b` to `a`.
