@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1538370791717.000,
-    "dirty" : true,
+    "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
     "hash" : "0",
     "id" : "D4F617AB",
-    "lastKnownWriteTime" : 1538371578,
-    "last_content_update" : 1538371791122,
+    "lastKnownWriteTime" : 1538458444,
+    "last_content_update" : 1538458444936,
     "path" : "~/GoogleDrive/TA/stat545/stat545_guest_lecture/cm010-exercise-solution.Rmd",
     "project_path" : "cm010-exercise-solution.Rmd",
     "properties" : {
-        "cursorPosition" : "190,5",
-        "scrollLine" : "168"
+        "cursorPosition" : "24,38",
+        "scrollLine" : "10"
     },
     "relative_order" : 1,
     "source_on_save" : false,

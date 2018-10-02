@@ -16,9 +16,9 @@ suppressPackageStartupMessages(library(nycflights13))
 Types of mutating join
 ----------------------
 
-### Let's join data.frames using four mutating functions:
+### Let's join tibbles using four mutating functions:
 
--   create two data.frames named `a` and `b`, similar to Data Wrangling Cheatsheet
+-   create two tibbles named `a` and `b`, similar to Data Wrangling Cheatsheet
 -   use `left_join`, `right_join`, `inner_join` and `full_join` functions
 -   example for `left_join`: Join matching rows from b to a
 -   example for `right_join`: Join matching rows from a to b
@@ -28,75 +28,75 @@ Types of mutating join
 -   example of two variables have identical names
 
 ``` r
-#create two data.frames named a and b
-(a <- data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+#create two tibble named a and b
+(a <- tibble(x1 = LETTERS[1:3], x2 = 1:3))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
-    ## 3  C  3
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
+    ## 3 C         3
 
 ``` r
-(b <- data.frame(x1 = LETTERS[c(1,2,4)], x3 = c("T", "F", "T")))
+(b <- tibble(x1 = LETTERS[c(1,2,4)], x3 = c("T", "F", "T")))
 ```
 
-    ##   x1 x3
-    ## 1  A  T
-    ## 2  B  F
-    ## 3  D  T
+    ## # A tibble: 3 x 2
+    ##   x1    x3   
+    ##   <chr> <chr>
+    ## 1 A     T    
+    ## 2 B     F    
+    ## 3 D     T
 
 ``` r
 #left_join: Join matching rows from b to a
 left_join(a, b, by = "x1")
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2   x3
-    ## 1  A  1    T
-    ## 2  B  2    F
-    ## 3  C  3 <NA>
+    ## # A tibble: 3 x 3
+    ##   x1       x2 x3   
+    ##   <chr> <int> <chr>
+    ## 1 A         1 T    
+    ## 2 B         2 F    
+    ## 3 C         3 <NA>
 
 ``` r
 #right_join: Join matching rows from a to b.
 right_join(a, b, by = "x1")
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2 x3
-    ## 1  A  1  T
-    ## 2  B  2  F
-    ## 3  D NA  T
+    ## # A tibble: 3 x 3
+    ##   x1       x2 x3   
+    ##   <chr> <int> <chr>
+    ## 1 A         1 T    
+    ## 2 B         2 F    
+    ## 3 D        NA T
 
 ``` r
 #inner_join: Join data. Retain only rows in both sets
 inner_join(a, b, by = "x1")
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2 x3
-    ## 1  A  1  T
-    ## 2  B  2  F
+    ## # A tibble: 2 x 3
+    ##   x1       x2 x3   
+    ##   <chr> <int> <chr>
+    ## 1 A         1 T    
+    ## 2 B         2 F
 
 ``` r
 #full_join: Join data. Retain all values, all rows.
 full_join(a, b, by = "x1")
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2   x3
-    ## 1  A  1    T
-    ## 2  B  2    F
-    ## 3  C  3 <NA>
-    ## 4  D NA    T
+    ## # A tibble: 4 x 3
+    ##   x1       x2 x3   
+    ##   <chr> <int> <chr>
+    ## 1 A         1 T    
+    ## 2 B         2 F    
+    ## 3 C         3 <NA> 
+    ## 4 D        NA T
 
 ``` r
 #what happen if we do not specify by option?
@@ -105,36 +105,36 @@ left_join(a, b)
 
     ## Joining, by = "x1"
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2   x3
-    ## 1  A  1    T
-    ## 2  B  2    F
-    ## 3  C  3 <NA>
+    ## # A tibble: 3 x 3
+    ##   x1       x2 x3   
+    ##   <chr> <int> <chr>
+    ## 1 A         1 T    
+    ## 2 B         2 F    
+    ## 3 C         3 <NA>
 
 ``` r
-#what happen if we specify two different variables from two data.frames?
+#what happen if we specify two different variables from two tibbles?
 left_join(a, b, by = c("x1" = "x3"))
 ```
 
-    ## Warning: Column `x1`/`x3` joining factors with different levels, coercing
-    ## to character vector
-
-    ##   x1 x2 x1.y
-    ## 1  A  1 <NA>
-    ## 2  B  2 <NA>
-    ## 3  C  3 <NA>
+    ## # A tibble: 3 x 3
+    ##   x1       x2 x1.y 
+    ##   <chr> <int> <chr>
+    ## 1 A         1 <NA> 
+    ## 2 B         2 <NA> 
+    ## 3 C         3 <NA>
 
 ``` r
 #what happen if two columns have the identical names
-(c <- data.frame(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
+(c <- tibble(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  4
-    ## 3  x  5
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <dbl>
+    ## 1 A         1
+    ## 2 B         4
+    ## 3 x         5
 
 ``` r
 inner_join(a, c)
@@ -142,11 +142,10 @@ inner_join(a, c)
 
     ## Joining, by = c("x1", "x2")
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  A  1
+    ## # A tibble: 1 x 2
+    ##   x1       x2
+    ##   <chr> <dbl>
+    ## 1 A         1
 
 `nycflights13` dataset has four tibbles e.g., `flights`, `airports`, `planes` and `weather`.
 --------------------------------------------------------------------------------------------
@@ -302,32 +301,36 @@ flights2 %>% left_join(weather, by = "time_hour")
 Types of filtering join
 -----------------------
 
-### Let's filter data.frames using two filtering functions:
+### Let's filter tibbles using two filtering functions:
 
--   create two data.frames named `a` and `b`, similar to Data Wrangling Cheatsheet
+-   create two tibbles named `a` and `b`, similar to Data Wrangling Cheatsheet
 -   use `semi_join`, `anti_join` functions
 -   example for `semi_join`: All rows in a that have a match in b
 -   example for `anti_join`: All rows in a that do not have a match in b
 -   example of using two different variables from two datasets
 
 ``` r
-#create two data.frames named a and b
-(a <- data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+#create two tibbles named a and b
+(a <- tibble(x1 = LETTERS[1:3], x2 = 1:3))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
-    ## 3  C  3
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
+    ## 3 C         3
 
 ``` r
-(b <- data.frame(x1 = LETTERS[c(1,2,4)], x3 = c("T", "F", "T")))
+(b <- tibble(x1 = LETTERS[c(1,2,4)], x3 = c("T", "F", "T")))
 ```
 
-    ##   x1 x3
-    ## 1  A  T
-    ## 2  B  F
-    ## 3  D  T
+    ## # A tibble: 3 x 2
+    ##   x1    x3   
+    ##   <chr> <chr>
+    ## 1 A     T    
+    ## 2 B     F    
+    ## 3 D     T
 
 ``` r
 # example for `semi_join`: All rows in a that have a match in b
@@ -336,12 +339,11 @@ semi_join(a,b)
 
     ## Joining, by = "x1"
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
+    ## # A tibble: 2 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
 
 ``` r
 # example for `anti_join`: All rows in a that do not have a match in b
@@ -350,22 +352,23 @@ anti_join(a,b)
 
     ## Joining, by = "x1"
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  C  3
+    ## # A tibble: 1 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 C         3
 
 ``` r
 # example of using two different variables from two datasets
 
-(c <- data.frame(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
+(c <- tibble(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  4
-    ## 3  x  5
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <dbl>
+    ## 1 A         1
+    ## 2 B         4
+    ## 3 x         5
 
 ``` r
 semi_join(a, c)
@@ -373,18 +376,17 @@ semi_join(a, c)
 
     ## Joining, by = c("x1", "x2")
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  A  1
+    ## # A tibble: 1 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
 
 Types of Set Operations for two datasets
 ----------------------------------------
 
 ### Let's use three `set` functions:
 
--   create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
+-   create two tibbles named `y` and `z`, similar to Data Wrangling Cheatsheet
 -   use `intersect`, `union` and `setdiff` functions
 -   example for `intersect`: Rows that appear in both `y` and `z`
 -   example for `union`: Rows that appear in either or both `y` and `z`
@@ -392,80 +394,82 @@ Types of Set Operations for two datasets
 -   what happen if colnames are different?
 
 ``` r
-# create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
-(y = data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+# create two tibbles named `y` and `z`, similar to Data Wrangling Cheatsheet
+(y <-  tibble(x1 = LETTERS[1:3], x2 = 1:3))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
-    ## 3  C  3
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
+    ## 3 C         3
 
 ``` r
-(z = data.frame(x1 = c("B", "C", "D"), x2 = 2:4))
+(z <- tibble(x1 = c("B", "C", "D"), x2 = 2:4))
 ```
 
-    ##   x1 x2
-    ## 1  B  2
-    ## 2  C  3
-    ## 3  D  4
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 B         2
+    ## 2 C         3
+    ## 3 D         4
 
 ``` r
 # example for `intersect`: Rows that appear in both `y` and `z`
 intersect(y,z)
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  B  2
-    ## 2  C  3
+    ## # A tibble: 2 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 B         2
+    ## 2 C         3
 
 ``` r
 # example for `union`: Rows that appear in either or both `y` and `z`
 union(y,z)
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  D  4
-    ## 2  C  3
-    ## 3  B  2
-    ## 4  A  1
+    ## # A tibble: 4 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 D         4
+    ## 2 C         3
+    ## 3 B         2
+    ## 4 A         1
 
 ``` r
 # example for `setdiff`: Rows that appear in `y` but not `z`. __Caution:__ `setdiff` for `y` to `z` and `z` to `y` are different.
 setdiff(y,z)
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  A  1
+    ## # A tibble: 1 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
 
 ``` r
 setdiff(z,y)
 ```
 
-    ## Warning: Column `x1` joining factors with different levels, coercing to
-    ## character vector
-
-    ##   x1 x2
-    ## 1  D  4
+    ## # A tibble: 1 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 D         4
 
 ``` r
 # what happen if colnames are different? 
-(x = data.frame(x1 = c("B", "C", "D"), x3 = 2:4))
+(x <- tibble(x1 = c("B", "C", "D"), x3 = 2:4))
 ```
 
-    ##   x1 x3
-    ## 1  B  2
-    ## 2  C  3
-    ## 3  D  4
+    ## # A tibble: 3 x 2
+    ##   x1       x3
+    ##   <chr> <int>
+    ## 1 B         2
+    ## 2 C         3
+    ## 3 D         4
 
 ``` r
 #intersect(y,x)
@@ -477,104 +481,102 @@ Types of binding datasets
 
 ### Let's bind datasets by rows or column using two binding functions:
 
--   create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
+-   create two tibbles named `y` and `z`, similar to Data Wrangling Cheatsheet
 -   use `bind_rows`, `bind_cols` functions
 -   example for `bind_rows`: Append z to y as new rows
 -   example for `bind_cols`: Append z to y as new columns. **Caution**: matches rows by position
 -   what happen if colnames are different?
 
 ``` r
-# create two data.frames named `y` and `z`, similar to Data Wrangling Cheatsheet
-(y = data.frame(x1 = LETTERS[1:3], x2 = 1:3))
+# create two tibbles named `y` and `z`, similar to Data Wrangling Cheatsheet
+(y <-  tibble(x1 = LETTERS[1:3], x2 = 1:3))
 ```
 
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
-    ## 3  C  3
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
+    ## 3 C         3
 
 ``` r
-(z = data.frame(x1 = c("B", "C", "D"), x2 = 2:4))
+(z <-  tibble(x1 = c("B", "C", "D"), x2 = 2:4))
 ```
 
-    ##   x1 x2
-    ## 1  B  2
-    ## 2  C  3
-    ## 3  D  4
+    ## # A tibble: 3 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 B         2
+    ## 2 C         3
+    ## 3 D         4
 
 ``` r
 # example for `bind_rows`: Append z to y as new rows
 bind_rows(y,z)
 ```
 
-    ## Warning in bind_rows_(x, .id): Unequal factor levels: coercing to character
-
-    ## Warning in bind_rows_(x, .id): binding character and factor vector,
-    ## coercing into character vector
-
-    ## Warning in bind_rows_(x, .id): binding character and factor vector,
-    ## coercing into character vector
-
-    ##   x1 x2
-    ## 1  A  1
-    ## 2  B  2
-    ## 3  C  3
-    ## 4  B  2
-    ## 5  C  3
-    ## 6  D  4
+    ## # A tibble: 6 x 2
+    ##   x1       x2
+    ##   <chr> <int>
+    ## 1 A         1
+    ## 2 B         2
+    ## 3 C         3
+    ## 4 B         2
+    ## 5 C         3
+    ## 6 D         4
 
 ``` r
 # example for `bind_cols`: Append z to y as new columns. __Caution__: matches rows by position
 bind_cols(y,z) #check colnames
 ```
 
-    ##   x1 x2 x11 x21
-    ## 1  A  1   B   2
-    ## 2  B  2   C   3
-    ## 3  C  3   D   4
+    ## # A tibble: 3 x 4
+    ##   x1       x2 x11     x21
+    ##   <chr> <int> <chr> <int>
+    ## 1 A         1 B         2
+    ## 2 B         2 C         3
+    ## 3 C         3 D         4
 
 ``` r
 # what happen if colnames are different? 
-(x = data.frame(x1 = c("B", "C", "D"), x3 = 2:4))
+(x <- tibble(x1 = c("B", "C", "D"), x3 = 2:4))
 ```
 
-    ##   x1 x3
-    ## 1  B  2
-    ## 2  C  3
-    ## 3  D  4
+    ## # A tibble: 3 x 2
+    ##   x1       x3
+    ##   <chr> <int>
+    ## 1 B         2
+    ## 2 C         3
+    ## 3 D         4
 
 ``` r
 bind_rows(y,x)
 ```
 
-    ## Warning in bind_rows_(x, .id): Unequal factor levels: coercing to character
-
-    ## Warning in bind_rows_(x, .id): binding character and factor vector,
-    ## coercing into character vector
-
-    ## Warning in bind_rows_(x, .id): binding character and factor vector,
-    ## coercing into character vector
-
-    ##   x1 x2 x3
-    ## 1  A  1 NA
-    ## 2  B  2 NA
-    ## 3  C  3 NA
-    ## 4  B NA  2
-    ## 5  C NA  3
-    ## 6  D NA  4
+    ## # A tibble: 6 x 3
+    ##   x1       x2    x3
+    ##   <chr> <int> <int>
+    ## 1 A         1    NA
+    ## 2 B         2    NA
+    ## 3 C         3    NA
+    ## 4 B        NA     2
+    ## 5 C        NA     3
+    ## 6 D        NA     4
 
 ``` r
 bind_cols(y,x)
 ```
 
-    ##   x1 x2 x11 x3
-    ## 1  A  1   B  2
-    ## 2  B  2   C  3
-    ## 3  C  3   D  4
+    ## # A tibble: 3 x 4
+    ##   x1       x2 x11      x3
+    ##   <chr> <int> <chr> <int>
+    ## 1 A         1 B         2
+    ## 2 B         2 C         3
+    ## 3 C         3 D         4
 
 Practice Exercises
 ------------------
 
 Practice these concepts in the following exercises. It might help you to first identify the type of function you are applying.
 
-#### Let's create a data.frame `a` with x1 and x2 coulmns and have duplicated element in x1 column. Create another data.frame `b` with x1 and x3 columns. Then apply `left_join` function `a` to `b` and `b` to `a`.
+#### Let's create a tibble `a` with x1 and x2 coulmns and have duplicated element in x1 column. Create another tibble `b` with x1 and x3 columns. Then apply `left_join` function `a` to `b` and `b` to `a`.
