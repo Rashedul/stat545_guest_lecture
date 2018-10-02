@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+output: 
+    html_document:
+      keep_md: YES
+---
+
+
+
+
+```r
+## load gapminder
+suppressPackageStartupMessages(library(gapminder))
+## load tidyverse
+suppressPackageStartupMessages(library(tidyverse))
+
+gapminder %>% 
+  # group by continent
+  group_by(continent) %>% 
+  # calculate summaries
+  summarize(
+    avg_gdpPercap = mean(gdpPercap),
+    max_lifeExp = max(lifeExp),
+    min_pop = min(pop),
+    total = n()
+  ) %>%
+  # display table
+  knitr::kable()
+```
+
+
+
+continent    avg_gdpPercap   max_lifeExp   min_pop   total
+----------  --------------  ------------  --------  ------
+Africa            2193.755        76.442     60011     624
+Americas          7136.110        80.653    662850     300
+Asia              7902.150        82.603    120447     396
+Europe           14469.476        81.757    147962     360
+Oceania          18621.609        81.235   1994794      24
+
