@@ -42,7 +42,7 @@ Here are some other resources you might find useful:
     
 ## Participation
 
-To get participation points for today, we'll be filling out the [cm010-exercise.Rmd](https://github.com/STAT545-UBC/Classroom/blob/master/notes/cm010-exercise.Rmd) file, and adding it to your participation repo. 
+To get participation points for today, we'll be filling out the [cm010-exercise.Rmd](https://github.com/Rashedul/stat545_guest_lecture/blob/master/cm010-exercise.Rmd) file, and adding it to your participation repo. 
 
 Let's get set up:
 
