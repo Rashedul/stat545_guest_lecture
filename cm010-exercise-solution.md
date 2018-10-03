@@ -27,8 +27,10 @@ Types of mutating join
 -   example of using two different variables from two datasets
 -   example of two variables have identical names
 
+create two tibble named a and b
+===============================
+
 ``` r
-#create two tibble named a and b
 (a <- tibble(x1 = LETTERS[1:3], x2 = 1:3))
 ```
 
@@ -50,8 +52,10 @@ Types of mutating join
     ## 2 B     F    
     ## 3 D     T
 
+left\_join: Join matching rows from `b` to `a` by matching "x1" variable
+========================================================================
+
 ``` r
-#left_join: Join matching rows from b to a
 left_join(a, b, by = "x1")
 ```
 
@@ -62,8 +66,10 @@ left_join(a, b, by = "x1")
     ## 2 B         2 F    
     ## 3 C         3 <NA>
 
+right\_join: Join matching rows from `a` to `b` by matching "x1" variable.
+==========================================================================
+
 ``` r
-#right_join: Join matching rows from a to b.
 right_join(a, b, by = "x1")
 ```
 
@@ -74,8 +80,10 @@ right_join(a, b, by = "x1")
     ## 2 B         2 F    
     ## 3 D        NA T
 
+inner\_join: Join data. Retain only rows in both sets `a` to `b` by matching "x1" variable.
+===========================================================================================
+
 ``` r
-#inner_join: Join data. Retain only rows in both sets
 inner_join(a, b, by = "x1")
 ```
 
@@ -85,8 +93,10 @@ inner_join(a, b, by = "x1")
     ## 1 A         1 T    
     ## 2 B         2 F
 
+full\_join: Join data. Retain all values, all rows of `a` to `b` by matching "x1"
+=================================================================================
+
 ``` r
-#full_join: Join data. Retain all values, all rows.
 full_join(a, b, by = "x1")
 ```
 
@@ -98,8 +108,10 @@ full_join(a, b, by = "x1")
     ## 3 C         3 <NA> 
     ## 4 D        NA T
 
+what happen if we do not specify `by` option?
+=============================================
+
 ``` r
-#what happen if we do not specify by option?
 left_join(a, b)
 ```
 
@@ -112,8 +124,10 @@ left_join(a, b)
     ## 2 B         2 F    
     ## 3 C         3 <NA>
 
+what happen if we specify two different variables from two tibbles `a` to `b`?
+==============================================================================
+
 ``` r
-#what happen if we specify two different variables from two tibbles?
 left_join(a, b, by = c("x1" = "x3"))
 ```
 
@@ -124,8 +138,11 @@ left_join(a, b, by = c("x1" = "x3"))
     ## 2 B         2 <NA> 
     ## 3 C         3 <NA>
 
+what happen if two columns of `a` and `c` datasets have the identical names?
+============================================================================
+
 ``` r
-#what happen if two columns have the identical names
+# make data frame c and use inner_join()
 (c <- tibble(x1 = c(LETTERS[1:2],"x"), x2 = c(1,4,5)))
 ```
 
