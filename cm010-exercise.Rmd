@@ -1,6 +1,8 @@
 ---
 title: "cm008 Exercises"
-output: github_document
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ##Install `nycflights13` package
