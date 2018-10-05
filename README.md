@@ -1,6 +1,6 @@
-# README:
+# Guest lecture stat545, fall 2018
 
-This directory contains the lecture materials for meeting 10, stat545, 2018.
+This directory contains the lecture materials for meeting 10, [stat545, UBC](http://stat545.com/Classroom/).
 
 Link to the resources:
 
